@@ -1,0 +1,12 @@
+name: McMatchmaking
+version: '${project.version}'
+main: at.flori4n.mcmatchmaking.McMatchmaking
+author: flori4n_
+
+commands:
+  start:
+    description: Starts the game;
+  mcMatchmaking:
+    description: mcMatchmaking commands;
+  team:
+    description: team commands;
