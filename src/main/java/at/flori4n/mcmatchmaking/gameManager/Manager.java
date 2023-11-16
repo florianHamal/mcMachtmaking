@@ -164,6 +164,7 @@ public class Manager {
 		}
 		for (Player player:Bukkit.getOnlinePlayers()) {
 			player.sendTitle("§6Team §4"+team.getTeamNumber(),"§6hat die Runde gewonnen");
+			player.playSound(player.getLocation(),Sound.ENDERDRAGON_DEATH,1,1);
 		}
 	}
 }
