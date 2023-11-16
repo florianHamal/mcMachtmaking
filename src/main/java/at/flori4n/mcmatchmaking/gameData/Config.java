@@ -12,7 +12,7 @@ public class Config {
 	private static FileConfiguration customFile;
 	
 	public static void setup() {
-		file = new File(Bukkit.getServer().getPluginManager().getPlugin("mcMatchmaking").getDataFolder()+"/mcMatchmaking.yml");
+		file = new File(Bukkit.getServer().getPluginManager().getPlugin("McMatchmaking").getDataFolder()+"/McMatchmaking.yml");
 		if(!file.exists()) {
 			try{
 				file.createNewFile();

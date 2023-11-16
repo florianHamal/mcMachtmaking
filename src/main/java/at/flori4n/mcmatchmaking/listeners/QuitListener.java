@@ -19,7 +19,7 @@ public class QuitListener implements Listener{
 			System.out.println("strange things on player "+event.getPlayer().getName());
 		}
 		event.setQuitMessage(event.getPlayer().getName()+" hat die Runde verlassen");
-		Bukkit.broadcastMessage(gameData.getCounterMessage());
+		Bukkit.broadcastMessage(gameData.getLobbyCountMessage());
 	}
 	
 }

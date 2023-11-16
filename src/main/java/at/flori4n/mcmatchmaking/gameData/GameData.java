@@ -61,7 +61,7 @@ public class GameData {
     }
 
 
-    public String getCounterMessage(){
+    public String getLobbyCountMessage(){
         return Bukkit.getOnlinePlayers().size()+"/"+ maxPlayers+" Spieler befinden sich in der Lobby";
     }
 
@@ -106,13 +106,10 @@ public class GameData {
             Config.getCustomFile().set("BorderEndPointAmount",Border.getEndPoints().size());
             System.out.println(Border.getEndPoints().toString());
             for (int i = 0;i<Border.getEndPoints().size();i++) {
-                System.out.println("TestInternal");
                 Config.getCustomFile().set("BorderCenterX"+i, Border.getEndPoints().get(i).getX());
                 Config.getCustomFile().set("BorderCenterY"+i, Border.getEndPoints().get(i).getY());
                 Config.getCustomFile().set("BorderCenterZ"+i, Border.getEndPoints().get(i).getZ());
             }
-            System.out.println("Test2");
-
             Config.getCustomFile().set("BorderDamage", Border.getDamage());
             Config.getCustomFile().set("BorderSpeed", Border.getSpeed());
             Config.getCustomFile().set("BorderSize", Border.getStartingSize());
@@ -179,10 +176,7 @@ public class GameData {
                             Config.getCustomFile().getDouble("BorderCenterX" + i),
                             Config.getCustomFile().getDouble("BorderCenterY" + i),
                             Config.getCustomFile().getDouble("BorderCenterZ" + i)));
-                    System.out.println("test1");
                 }
-
-                System.out.println("test2");
                 Border.setDamage((float) Config.getCustomFile().getDouble("BorderDamage"));
                 Border.setSpeed(Config.getCustomFile().getLong("BorderSpeed"));
                 Border.setStartingSize((float) Config.getCustomFile().getDouble("BorderSize"));
