@@ -47,7 +47,7 @@ public class Manager {
 							over();
 							break;
 						default:
-							Bukkit.broadcastMessage("�6Ein Fehler ist passiert");
+							Bukkit.broadcastMessage("§6Ein Fehler ist passiert");
 					}
 
 					if (counter >= 0) {
@@ -94,7 +94,7 @@ public class Manager {
 	}
 	private void ingame(){
 		try {
-			Bukkit.broadcastMessage("§6Team §4"+ checkWinnerTeam() + " §6hat die Runde gewonnen");
+			sendWinMessage(checkWinnerTeam());
 			counter = 15;
 			if (gameData.isWorldBorder()){
 				Border.stop();
@@ -110,21 +110,17 @@ public class Manager {
 		}
 	}
 
-	public int checkWinnerTeam() throws Exception {
-		int counter = 0;
-		int teamNumber = 0;
+	public Team checkWinnerTeam() throws Exception {
+		int teamsAlive = 0;
+		Team winnerTeam = null;
 		for (Team team:gameData.getTeams()){
 			if(team.isTeamAlive()){
-				counter++;
-				teamNumber = team.getTeamNumber();
+				teamsAlive++;
+				if (teamsAlive>1)throw new Exception("noTeamHasWonYet");
+				winnerTeam = team;
 			}
 		}
-		if(counter>1){
-			throw new Exception("noTeamHasWonYet");
-		}else {
-			return teamNumber;
-		}
-
+		return winnerTeam;
 	}
 	public void putPlayersInnTeams(){
 		boolean isInTeam;
@@ -160,5 +156,14 @@ public class Manager {
 			instance=new Manager();
 		}
 		return instance;
+	}
+	public static void sendWinMessage(Team team){
+		Bukkit.broadcastMessage("§6Team §4"+ team.getTeamNumber() + " §3hat die Runde gewonnen");
+		for (Player player:team.getPlayers()) {
+			Bukkit.broadcastMessage("§3-> "+player.getName());
+		}
+		for (Player player:Bukkit.getOnlinePlayers()) {
+			player.sendTitle("§6Team §4"+team.getTeamNumber(),"§6hat die Runde gewonnen");
+		}
 	}
 }
