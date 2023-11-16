@@ -158,9 +158,9 @@ public class Manager {
 		return instance;
 	}
 	public static void sendWinMessage(Team team){
-		Bukkit.broadcastMessage("§6Team §4"+ team.getTeamNumber() + " §3hat die Runde gewonnen");
+		Bukkit.broadcastMessage("§3-> §6Team §4"+ team.getTeamNumber() + " §3hat die Runde gewonnen");
 		for (Player player:team.getPlayers()) {
-			Bukkit.broadcastMessage("§3-> "+player.getName());
+			Bukkit.broadcastMessage("§3--> "+player.getName());
 		}
 		for (Player player:Bukkit.getOnlinePlayers()) {
 			player.sendTitle("§6Team §4"+team.getTeamNumber(),"§6hat die Runde gewonnen");
