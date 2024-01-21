@@ -36,13 +36,9 @@ public class Team {
         if(players.size()<maxSize) {
             players.add(player);
             playersAlive.add(player);
-            try {
-                setNameColor(player);
-            } catch (Exception e){
-            }
+            if(maxSize>1)setNameColor(player);
         }else{
             player.sendMessage("Dieses Team ist leider voll");
-            System.out.println("endelse");
         }
     }
     public void removePlayer (Player player){

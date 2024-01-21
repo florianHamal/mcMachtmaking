@@ -63,14 +63,17 @@ public class SetupCommands implements CommandExecutor {
 					Border.setCenter(player.getLocation());
 					Border.setWorld(player.getWorld());
 					player.getWorld().getWorldBorder().setCenter(player.getLocation());
-
+					break;
+				case "toggleTeamSelector":
+					gameData.setTeamselectorIsActivated(Boolean.parseBoolean(args[1]));
 					break;
 				case "help":
-					player.sendMessage("setLobby -> setzt die lobby" +
-										  "setSpawn -> setzt den Spawn eines Teams neu" +
-							"save -> speichert die EInstellungen"+
-							"setPlayersToStart -> setzt die Spielerzahl ab der die Runde startet" +
-							"reoveTeam ->entfernt das Team mit der Nummer");
+					player.sendMessage("setLobby -> setzt die lobby\n" +
+										  "setSpawn -> setzt den Spawn eines Teams neu\n" +
+							"save -> speichert die EInstellungen\n"+
+							"setPlayersToStart -> setzt die Spielerzahl ab der die Runde startet\n" +
+							"reoveTeam ->entfernt das Team mit der Nummer\n"+
+							"toggleTeamSelector ->schaltet den LobbyTeamSelector ein/aus");
 					break;
 			default:
 				player.sendMessage("falsche reinfolge\n" +

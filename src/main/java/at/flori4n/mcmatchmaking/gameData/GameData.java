@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class GameData {
     private static GameData instance;
-
+    private boolean teamselectorIsActivated;
     private GameMode ingameMode = GameMode.ADVENTURE;
     private GameMode lobbyMode = GameMode.ADVENTURE;
     private static HashMap<Integer, ChatColor> teamColors= new HashMap<Integer,ChatColor>();
@@ -87,6 +87,7 @@ public class GameData {
         Config.getCustomFile().set("lobby.yaw",lobby.getYaw());
         Config.getCustomFile().set("lobby.pitch",lobby.getPitch());
         Config.getCustomFile().set("lobby.world",(String)lobby.getWorld().getName());
+        Config.getCustomFile().set("teamselectorIsActivated",teamselectorIsActivated);
             for(int i =0;i<teams.size();i++) {
                 Config.getCustomFile().set("spawn"+i+".x",teams.get(i).getLocation().getX());
                 Config.getCustomFile().set("spawn"+i+".y",teams.get(i).getLocation().getY());
@@ -135,6 +136,7 @@ public class GameData {
             this.lobby.setYaw(yaw);
             this.lobby.setPitch(pitch);
             this.lobby.setWorld(Bukkit.getWorld((String) Config.getCustomFile().get("lobby.world")));
+            this.teamselectorIsActivated = Config.getCustomFile().getBoolean("teamselectorIsActivated",teamselectorIsActivated);
         }catch(Exception e) {
             System.out.println("Exception while reading file");
         }
@@ -343,5 +345,13 @@ public class GameData {
 
     public void setPreventBlockBreaking(boolean preventBlockBreaking) {
         this.preventBlockBreaking = preventBlockBreaking;
+    }
+
+    public boolean isTeamselectorIsActivated() {
+        return teamselectorIsActivated;
+    }
+
+    public void setTeamselectorIsActivated(boolean teamselectorIsActivated) {
+        this.teamselectorIsActivated = teamselectorIsActivated;
     }
 }

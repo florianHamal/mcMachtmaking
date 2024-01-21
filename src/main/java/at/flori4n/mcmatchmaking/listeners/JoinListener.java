@@ -18,22 +18,26 @@ public class JoinListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		if(!gameData.isStart()) return;
 		clearPlayerInv(event.getPlayer());
 			if (Manager.getInstance().getGameState() == Manager.GameState.lobby || Manager.getInstance().getGameState() == Manager.GameState.starting) {
-				event.setJoinMessage(event.getPlayer().getName() + " hat die Runde betreten");
 				event.getPlayer().setGameMode(gameData.getLobbyMode());
 				event.getPlayer().teleport(gameData.getLobby());
 				//for gui
-				ItemStack itemStack = new ItemStack(Material.BED);
-				ItemMeta itemMeta = itemStack.getItemMeta();
-				itemMeta.setDisplayName("§3team selector");
-				itemStack.setItemMeta(itemMeta);
-				event.getPlayer().getInventory().addItem(itemStack);
+				if (gameData.isTeamselectorIsActivated()){
+					ItemStack itemStack = new ItemStack(Material.BED);
+					ItemMeta itemMeta = itemStack.getItemMeta();
+					itemMeta.setDisplayName("§3team selector");
+					itemStack.setItemMeta(itemMeta);
+					event.getPlayer().getInventory().addItem(itemStack);
+				}
+				event.setJoinMessage(event.getPlayer().getName() + " hat die Runde betreten");
+				Bukkit.broadcastMessage(gameData.getLobbyCountMessage());
 			} else {
 				event.getPlayer().setGameMode(GameMode.SPECTATOR);
 				event.getPlayer().teleport(gameData.getTeams().get(0).getLocation());
 			}
-			Bukkit.broadcastMessage(gameData.getLobbyCountMessage());
+
 	}
 	public void clearPlayerInv(Player player){
 		player.getInventory().clear();

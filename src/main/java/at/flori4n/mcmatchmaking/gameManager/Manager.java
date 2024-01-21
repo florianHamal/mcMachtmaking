@@ -158,13 +158,26 @@ public class Manager {
 		return instance;
 	}
 	public static void sendWinMessage(Team team){
-		Bukkit.broadcastMessage("§3-> §6Team §4"+ team.getTeamNumber() + " §3hat die Runde gewonnen");
-		for (Player player:team.getPlayers()) {
-			Bukkit.broadcastMessage("§3--> "+player.getName());
+		if (team.getMaxSize()<=1){
+			//if singleplayer teams
+			Bukkit.broadcastMessage("§3-> §4"+ team.getPlayers().get(0).getName() + " §3hat die Runde gewonnen");
+			for (Player player:Bukkit.getOnlinePlayers()) {
+				player.sendTitle("§4"+team.getPlayers().get(0).getName(),"§6hat die Runde gewonnen");
+				player.playSound(player.getLocation(),Sound.ENDERDRAGON_DEATH,1,1);
+			}
+		}else {
+			//if teams with multiple players
+			Bukkit.broadcastMessage("§3-> §6Team §4"+ team.getTeamNumber() + " §3hat die Runde gewonnen");
+			for (Player player:team.getPlayers()) {
+				Bukkit.broadcastMessage("§3--> "+player.getName());
+			}
+			for (Player player:Bukkit.getOnlinePlayers()) {
+				player.sendTitle("§6Team §4"+team.getTeamNumber(),"§6hat die Runde gewonnen");
+				player.playSound(player.getLocation(),Sound.ENDERDRAGON_DEATH,1,1);
+			}
 		}
-		for (Player player:Bukkit.getOnlinePlayers()) {
-			player.sendTitle("§6Team §4"+team.getTeamNumber(),"§6hat die Runde gewonnen");
-			player.playSound(player.getLocation(),Sound.ENDERDRAGON_DEATH,1,1);
-		}
+
+
+
 	}
 }
